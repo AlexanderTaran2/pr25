@@ -39,7 +39,7 @@ function App() {
     
     try {
       setLoading(true);
-      const response = await axios.post(`${API_URL}/auth/register`, {
+      const = await axios.post(`${API_URL}/auth/register`, {
         email: formData.get('email'),
         password: formData.get('password')
       });
