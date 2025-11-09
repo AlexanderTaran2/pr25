@@ -24,8 +24,8 @@ function App() {
   const fetchTodos = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/todos`);
-      setTodos(response.data);
+      const _response = await axios.get(`${API_URL}/todos`);
+      setTodos(_response.data);
     } catch (err) {
       setError('Ошибка загрузки задач');
     } finally {
@@ -39,7 +39,7 @@ function App() {
     
     try {
       setLoading(true);
-      const = await axios.post(`${API_URL}/auth/register`, {
+      await axios.post(`${API_URL}/auth/register`, {
         email: formData.get('email'),
         password: formData.get('password')
       });
@@ -57,12 +57,12 @@ function App() {
     
     try {
       setLoading(true);
-      const response = await axios.post(`${API_URL}/auth/login`, {
+      const _response = await axios.post(`${API_URL}/auth/login`, {
         email: formData.get('email'),
         password: formData.get('password')
       });
       
-      const { token, user } = response.data;
+      const { token, user } = _response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -88,8 +88,8 @@ function App() {
     
     try {
       setLoading(true);
-      const response = await axios.post(`${API_URL}/todos`, newTodo);
-      setTodos([response.data, ...todos]);
+      const _response = await axios.post(`${API_URL}/todos`, newTodo);
+      setTodos([_response.data, ...todos]);
       setNewTodo({ title: '', description: '' });
     } catch (err) {
       setError(err.response?.data?.error || 'Ошибка создания задачи');
@@ -100,8 +100,8 @@ function App() {
 
   const handleUpdateTodo = async (id, completed) => {
     try {
-      const response = await axios.put(`${API_URL}/todos/${id}`, { completed });
-      setTodos(todos.map(todo => todo.id === id ? response.data : todo));
+      const _response = await axios.put(`${API_URL}/todos/${id}`, { completed });
+      setTodos(todos.map(todo => todo.id === id ? _response.data : todo));
     } catch (err) {
       setError('Ошибка обновления задачи');
     }
